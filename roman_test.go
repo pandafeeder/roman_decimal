@@ -12,11 +12,10 @@ func TestNewRomanPanic(t *testing.T) {
 		}
 	}()
 	_ = NewRoman(str)
-}
-
-func TestNewRoman(t *testing.T) {
 	str2 := "MMCCCXXVIII"
 	r1 := NewRoman(str2)
-	t.Log("r1 shape:")
-	t.Log(r1)
+
+	if r1.Decimal != 0 {
+		t.Error("unconverted roman should have 0 as decimal number")
+	}
 }

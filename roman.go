@@ -5,8 +5,9 @@ import (
 )
 
 type Roman struct {
-	chars string
-	pats  []string
+	Chars   string `json:"Roman"`
+	pats    []string
+	Decimal int `json:"Decimal"`
 }
 
 var romanReg = regexp.MustCompile(`^(M{0,3})(CM|DC{0,3}|CD|C{0,3})(XC|LX{0,3}|XL|X{0,3})(IX|VI{0,3}|IV|I{0,3})$`)
@@ -16,5 +17,5 @@ func NewRoman(chars string) Roman {
 	if matches == nil {
 		panic("Unvalide Roman number format")
 	}
-	return Roman{chars, matches[1:]}
+	return Roman{chars, matches[1:], 0}
 }

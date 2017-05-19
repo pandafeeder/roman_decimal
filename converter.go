@@ -2,11 +2,20 @@ package roman_decimal
 
 import (
 	"bytes"
+	"encoding/json"
 	"strings"
 )
 
-type JSON interface {
-	ToJSON()
+type RomanDecimalJSON interface {
+	ToJSON() ([]byte, error)
+}
+
+func (r *Roman) ToJSON() ([]byte, error) {
+	return json.Marshal(r)
+}
+
+func (d *Decimal) ToJSON() ([]byte, error) {
+	return json.Marshal(d)
 }
 
 var numToRomanMap = map[int]string{
@@ -53,12 +62,13 @@ func (v *Roman) ToDecimal() int {
 			}
 		}
 	}
+	v.Decimal = num
 	return num
 }
 
 func (d *Decimal) ToRoman() string {
 	var buffer bytes.Buffer
-	decimal := d.num
+	decimal := d.Num
 	nums := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
 	for decimal != 0 {
 	L1:
@@ -70,5 +80,6 @@ func (d *Decimal) ToRoman() string {
 			}
 		}
 	}
-	return buffer.String()
+	d.Roman = buffer.String()
+	return d.Roman
 }

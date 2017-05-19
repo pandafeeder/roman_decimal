@@ -13,4 +13,8 @@ func TestNewDecimal(t *testing.T) {
 	}()
 	_ = NewDecimal(num)
 
+	d1 := NewDecimal(10)
+	if d1.Roman != "" {
+		t.Error("unconverted decimal should have empty string as roman number")
+	}
 }
